@@ -13,7 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,22 +36,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText img_title;
     ImageView imageView;
     Bitmap bitmap;
-
     JsonPlaceApi jsonPlaceApi;
+
+    LinearLayout linearLayout;
+
+    TableLayout tableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.tablelayout);
 
 
-        img_title=(EditText)findViewById(R.id.imagetitleid);
-        imageView=(ImageView)findViewById(R.id.imageid);
-        chosebtn=(Button) findViewById(R.id.chosebynid);
-        uploadbtn=(Button)findViewById(R.id.uploadimgbtnid);
-        chosebtn.setOnClickListener(this);
-        uploadbtn.setOnClickListener(this);
+//        img_title=(EditText)findViewById(R.id.imagetitleid);
+//        imageView=(ImageView)findViewById(R.id.imageid);
+//        chosebtn=(Button) findViewById(R.id.chosebynid);
+//        uploadbtn=(Button)findViewById(R.id.uploadimgbtnid);
+//        chosebtn.setOnClickListener(this);
+//        uploadbtn.setOnClickListener(this);
+
+        linearLayout=(LinearLayout)findViewById(R.id.linearlayoutid);
+
+        tableLayout=new TableLayout(this);
+
+        displaytable();
+
+
+
+
     }
+
+    //dynamic view adding
+
+
+    public  void displaytable(){
+
+        tableLayout.setLayoutParams(new TableLayout.LayoutParams
+                (TableLayout.LayoutParams.MATCH_PARENT,TableLayout.LayoutParams.WRAP_CONTENT));
+
+        for(int count=0;count<20;count++) {
+
+            TableRow row=new TableRow(this);
+            row.setLayoutParams(new TableRow.LayoutParams
+                    (TableRow.LayoutParams.MATCH_PARENT,TableRow.LayoutParams.WRAP_CONTENT));
+
+            TextView textView=new TextView(this);
+            textView.setText("test:"+count);
+
+            textView.setLayoutParams(new TableRow.LayoutParams
+                    (TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT));
+            TextView textView2=new TextView(this);
+            textView2.setText("test:"+count);
+
+            textView2.setLayoutParams(new TableRow.LayoutParams
+                    (TableRow.LayoutParams.WRAP_CONTENT,TableRow.LayoutParams.WRAP_CONTENT));
+
+            row.addView(textView,0);
+            row.addView(textView2,1);
+            tableLayout.addView(row);
+
+        }
+
+        linearLayout.addView(tableLayout);
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @Override
